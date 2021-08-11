@@ -1,0 +1,59 @@
+package ${packageName}.provider.${moduleName}.service.impl;
+
+import ${packageName}.annotation.TransactionalService;
+import ${packageName}.common.core.service.impl.IcoolleServiceImpl;
+import ${packageName}.model.${moduleName}.dto.${className}SaveDTO;
+import ${packageName}.model.${moduleName}.dto.${className}UpdateDTO;
+import ${packageName}.model.${moduleName}.po.${className};
+import ${packageName}.provider.${moduleName}.mapper.${className}Mapper;
+import ${packageName}.provider.${moduleName}.service.${className}Service;
+import org.springframework.beans.BeanUtils;
+import ${packageName}.model.${moduleName}.vo.${className}ListVO;
+import ${packageName}.model.${moduleName}.dto.${className}ListDTO;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+
+/**
+* @author: ${author}
+* @description: ${comment}业务接口实现
+* @projectName: ${className}ServiceImpl
+* @package: ${packageName}.provider.${moduleName}.service.impl
+* @date: ${nowDate}
+* @version: V1.0.0
+*/
+@TransactionalService
+public class ${className}ServiceImpl extends IcoolleServiceImpl<${className}, ${className}Mapper> implements ${className}Service {
+
+        @Autowired
+        private ${className}Mapper ${pathName}Mapper;
+
+        @Override
+        public List<${className}ListVO> list(${className}ListDTO ${pathName}ListDTO) {
+            return ${pathName}Mapper.list(${pathName}ListDTO);
+        }
+
+        @Override
+        public void save${className}(${className}SaveDTO ${pathName}SaveDTO) {
+            ${className} ${pathName} = new ${className}();
+            BeanUtils.copyProperties(${pathName}SaveDTO, ${pathName});
+            super.generalInsert(${pathName});
+        }
+
+        @Override
+        public void update${className}(${className}UpdateDTO ${pathName}UpdateDTO) {
+            ${className} ${pathName} = new ${className}();
+            BeanUtils.copyProperties(${pathName}UpdateDTO, ${pathName});
+            super.generalUpdate(${pathName});
+        }
+
+        @Override
+        public void delete${className}(Long id) {
+            super.removeById(id);
+        }
+
+        @Override
+        public ${className}ListVO get${className}(Long id){
+            ${className}ListVO ${pathName}ListVO = ${pathName}Mapper.get${className}(id);
+            return ${pathName}ListVO;
+        }
+}

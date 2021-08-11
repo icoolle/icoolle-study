@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tableDesignApp">
+<head>
+    <meta charset="UTF-8">
+    <title>数据库表管理</title>
+    <style>
+        td input {
+            color: red;
+        }
+    </style>
+    <!-- bootstrap 样式 -->
+    <link rel="stylesheet" href="../../../static/component/bootstrap-3.3.7/css/bootstrap.css"/>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="../../../static/component/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="../../../static/css/animate.css" rel="stylesheet">
+    <link href="../../../static/css/default.css" rel="stylesheet">
+    <!-- jqueryjs -->
+    <script type="text/javascript" src="../../../static/js/jquery-2.2.4.min.js"></script>
+    <!-- angularjs -->
+    <script type="text/javascript" src="../../../static/component/angular/angular.min.js"></script>
+    <!-- layer -->
+    <script type="text/javascript" src="../../../static/component/layer-v3.0.3/layer/layer.js"></script>
+    <!-- 基础js -->
+    <script type="text/javascript" src="../../../static/component/angular/api.js"></script>
+    <script type="text/javascript" src="../../../static/component/angular/const.js"></script>
+    <script type="text/javascript" src="../../../static/component/angular/request.js"></script>
+    <script src="../../../static/js/win10.child.js"></script>
+</head>
+<body ng-controller="tableDesignCtr">
+<div class="container-fluid">
+</div>
+<div class="row" style="padding: 10px">
+    <form name="myForm" novalidate>
+        <div class="col-lg-2">
+            <div class="input-group">
+                <span class="input-group-addon">作者</span>
+                <input type="text" class="form-control" placeholder="作者" name="author" required="required"
+                       aria-describedby="sizing-addon1" ng-model="model.author">
+            </div>
+            <span class="valid-form"
+                  ng-show="myForm.author.$dirty && myForm.author.$invalid || model.author==null">
+                <span ng-show="myForm.author.$error.required">作者是必须的。</span>
+            </span>
+        </div>
+        <div class="col-lg-2">
+            <div class="input-group">
+                <span class="input-group-addon">模块名</span>
+                <input type="text" class="form-control" placeholder="模块名" name="moduleName" required="required"
+                       aria-describedby="sizing-addon1" ng-model="model.moduleName">
+            </div>
+            <span class="valid-form"
+                  ng-show="myForm.moduleName.$dirty && myForm.moduleName.$invalid || model.moduleName==null">
+                <span ng-show="myForm.moduleName.$error.required">模块名是必须的。</span>
+            </span>
+        </div>
+        <div class="col-lg-2">
+            <div class="input-group">
+                <span class="input-group-addon">注释</span>
+                <input type="text" class="form-control" placeholder="注释" name="comment" required="required"
+                       aria-describedby="sizing-addon1" ng-model="model.comment">
+            </div>
+            <span class="valid-form"
+                  ng-show="myForm.comment.$dirty && myForm.comment.$invalid || model.comment==null">
+                <span ng-show="myForm.comment.$error.required">注释是必须的。</span>
+            </span>
+        </div>
+        <div class="col-lg-2">
+            <div class="input-group">
+                <span class="input-group-addon">表名</span>
+                <input type="text" class="form-control" placeholder="表名" name="tableName" required="required"
+                       aria-describedby="sizing-addon1" ng-model="model.tableName">
+            </div>
+            <span class="valid-form"
+                  ng-show="myForm.tableName.$dirty && myForm.tableName.$invalid || model.tableName==null">
+                <span ng-show="myForm.tableName.$error.required">表名是必须的。</span>
+            </span>
+        </div>
+        <div class="col-lg-2">
+            <div class="input-group">
+              <span class="input-group-addon">
+               <input type="checkbox" placeholder="是否覆盖文件" name="flag"
+                      aria-describedby="sizing-addon1" ng-model="model.flag">
+              </span>
+                <span class="input-group-addon">是否覆盖文件</span>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" ng-click="onClickBuildCode()"
+               ng-disabled="myForm.author.$dirty && myForm.user.$invalid ||
+                    myForm.comment.$dirty && myForm.comment.$invalid ||
+                    myForm.moduleName.$dirty && myForm.moduleName.$invalid ||
+                    myForm.tableName.$dirty && myForm.tableName.$invalid ||
+                    model.author==null || model.moduleName==null ||
+                    model.comment==null || model.tableName==null" value="生成代码"/>
+    </form>
+</div>
+<div class="table-responsive" style="padding: 10px;height: 90vh">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>列名</th>
+            <th>列注释</th>
+            <th>数据库类型</th>
+            <th>实体类型</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in tableColumns">
+            <td>
+                <input type="text" class="form-control" ng-model="item.columnName"/>
+            </td>
+            <td>
+                <input type="text" class="form-control" ng-model="item.columnComment"/>
+            </td>
+            <td ng-bind="item.dataType"></td>
+            <td>
+                <input type="text" class="form-control" ng-model="item.javaType"/>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" ng-click="onClickDel($index)">删除</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script src="./tableDesignController.js"></script>
+</html>

@@ -1,0 +1,34 @@
+package ${packageName}.provider.${moduleName}.mapper;
+
+import ${packageName}.common.core.mapper.IcoolleMapper;
+import ${packageName}.model.${moduleName}.po.${className};
+import ${packageName}.model.${moduleName}.vo.${className}ListVO;
+import ${packageName}.model.${moduleName}.dto.${className}ListDTO;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+
+/**
+* @author: ${author}
+* @description: ${comment}业务底层接口
+* @projectName: ${className}Mapper
+* @package: ${packageName}.provider.${moduleName}.mapper
+* @date: ${nowDate}
+* @version: V1.0.0
+*/
+public interface ${className}Mapper extends IcoolleMapper<${className}> {
+
+        /**
+        * 不分页${comment}列表
+        * @param ${pathName}ListDTO
+        * @return
+        */
+        List<${className}ListVO> list(@Param("param") ${className}ListDTO ${pathName}ListDTO);
+
+        /**
+        * ${comment}详情
+        * @param id
+        * @return
+        */
+        ${className}ListVO get${className}(Long id);
+
+}

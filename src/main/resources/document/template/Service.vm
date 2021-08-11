@@ -1,0 +1,57 @@
+package ${packageName}.provider.${moduleName}.service;
+
+import ${packageName}.common.core.service.IcoolleService;
+import ${packageName}.model.${moduleName}.dto.${className}SaveDTO;
+import ${packageName}.model.${moduleName}.dto.${className}UpdateDTO;
+import ${packageName}.model.${moduleName}.po.${className};
+import ${packageName}.provider.${moduleName}.mapper.${className}Mapper;
+import ${packageName}.model.${moduleName}.vo.${className}ListVO;
+import ${packageName}.model.${moduleName}.dto.${className}ListDTO;
+import java.util.List;
+
+/**
+* @author: ${author}
+* @description:  ${comment}业务接口
+* @projectName: ${className}Service
+* @package: ${packageName}.provider.${moduleName}.service
+* @date: ${nowDate}
+* @version: V1.0.0
+*/
+public interface ${className}Service extends IcoolleService<${className}, ${className}Mapper> {
+
+        /**
+        * 不分页${comment}列表
+        * @param ${pathName}ListDTO
+        * @return
+        */
+        List<${className}ListVO> list(${className}ListDTO ${pathName}ListDTO);
+
+        /**
+         * 保存${comment}信息
+         *
+         * @param ${pathName}SaveDTO ${comment}信息参数
+         */
+        void save${className}(${className}SaveDTO ${pathName}SaveDTO);
+
+
+        /**
+         * 修改${comment}信息
+         *
+         * @param ${pathName}UpdateDTO ${comment}信息参数
+         */
+        void update${className}(${className}UpdateDTO ${pathName}UpdateDTO);
+
+        /**
+         * 删除${comment}信息
+         *
+         * @param id 主键ID
+         */
+        void delete${className}(Long id);
+
+        /**
+        * ${comment}详情
+        * @param id
+        * @return
+        */
+        ${className}ListVO get${className}(Long id);
+}

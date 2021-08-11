@@ -1,0 +1,29 @@
+package ${packageName}.model.${moduleName}.vo;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+/**
+* @author: ${author}
+* @description: ${comment}信息列表返回实体
+* @projectName: ${className}ListVO
+* @package: ${packageName}.model.${moduleName}.vo
+* @date: ${nowDate}
+* @version: V1.0.0
+*/
+@Data
+@ApiModel("${comment}信息列表返回实体")
+@Accessors(chain = true)
+public class ${className}ListVO {
+
+#foreach($column in $tableColumnInfoList)
+    @ApiModelProperty("$column.comment")
+    private $column.dataType $column.attrName;
+
+#end
+}

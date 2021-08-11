@@ -1,0 +1,33 @@
+package ${packageName}.model.${moduleName}.po;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import ${packageName}.common.core.model.BaseBean;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+#if(!$flagExtends) import java.io.Serializable; {#end
+${javaTypeList}
+
+
+/**
+* @author: ${author}
+* @description: ${comment}管理实体类
+* @projectName: ${className}
+* @package: ${packageName}.model.${moduleName}.po
+* @date: ${nowDate}
+* @version: V1.0.0
+*/
+@Data
+@ApiModel("${comment}管理实体类")
+@TableName("${tableName}")
+@Accessors(chain = true)
+public class ${className} #if($flagExtends) extends BaseBean {#end #if(!$flagExtends) implements Serializable {#end
+
+#foreach($column in $tableColumnInfoListTwo)
+    @ApiModelProperty("$column.comment")
+    private $column.dataType $column.attrName;
+
+#end
+}

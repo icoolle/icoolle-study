@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 指明当前xml对应的Mapper -->
+<mapper namespace="com.icoolle.provider.ums.mapper.AdminUserMapper">
+
+    <sql id="adminUser">
+            adminUser.id,
+            adminUser.user_code,
+            adminUser.user_name,
+            adminUser.password,
+            adminUser.real_name,
+            adminUser.nick_name,
+            adminUser.email,
+            adminUser.phone,
+            adminUser.user_type,
+            adminUser.head_img,
+            adminUser.last_login_ip,
+            adminUser.last_login_time,
+            adminUser.display,
+            adminUser.remark,
+            adminUser.token,
+            adminUser.create_user_id,
+            adminUser.create_time,
+            adminUser.jobs,
+            adminUser.job_no,
+            adminUser.extension_no,
+            adminUser.work_site,
+            adminUser.hiredate
+    </sql>
+
+
+</mapper>

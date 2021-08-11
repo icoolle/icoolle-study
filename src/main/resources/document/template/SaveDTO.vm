@@ -1,0 +1,32 @@
+package ${packageName}.model.${moduleName}.dto;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+
+${javaTypeList}
+
+/**
+* @author: ${author}
+* @description: ${comment}管理保存实体参数
+* @projectName: ${className}SaveDTO
+* @package: ${packageName}.model.${moduleName}.dto
+* @date: ${nowDate}
+* @version: V1.0.0
+*/
+@Data
+@ApiModel("${comment}管理保存实体参数")
+@Accessors(chain = true)
+public class ${className}SaveDTO implements Serializable {
+
+#foreach($column in $tableColumnInfoListTwo)
+    @ApiModelProperty("$column.comment")
+    private $column.dataType $column.attrName;
+
+#end
+}

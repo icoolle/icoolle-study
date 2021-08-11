@@ -1,0 +1,21 @@
+package ${packageName}.model.${moduleName}.dto;
+
+import ${packageName}.common.core.model.BaseDTO;
+import io.swagger.annotations.ApiModel;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+/**
+* @author: ${author}
+* @description: ${comment}信息列表查询参数实体类
+* @projectName: ${className}ListDTO
+* @package: ${packageName}.model.${moduleName}.dto
+* @date: ${nowDate}
+* @version: V1.0.0
+*/
+@Data
+@ApiModel("${comment}信息列表查询参数实体类")
+@Accessors(chain = true)
+public class ${className}ListDTO extends BaseDTO {
+
+}

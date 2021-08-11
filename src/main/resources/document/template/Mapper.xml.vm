@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 指明当前xml对应的Mapper -->
+<mapper namespace="${packageName}.provider.${moduleName}.mapper.${className}Mapper">
+
+    <!-- 实体类表字段映射关系 -->
+    <resultMap id="BaseResultMap" type="${packageName}.model.${moduleName}.vo.${className}ListVO">
+        #foreach($columns in $tableColumnInfoList)
+            #if($columns.attrName == "id")
+                <id property="${columns.attrName}" column="${columns.columnName}"/>
+            #end
+            #if($columns.attrName != "id")
+                <result property="${columns.attrName}" column="${columns.columnName}"/>
+            #end
+        #end
+    </resultMap>
+
+    <!-- 表字段 -->
+    <sql id="Base_Column_List">
+        #foreach($columns in $tableColumnInfoList)
+            #if($foreach.hasNext)t.${columns.columnName},
+            #end
+            #if(!$foreach.hasNext)t.${columns.columnName}
+            #end
+        #end
+    </sql>
+
+    <!-- 不分页获取列表数据 -->
+    <select id="list" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ${tableName} AS t
+        <where>
+            t.del_flag = 0
+            <if test="param.keywords != null and param.keywords != ''">
+                and t.id like concat('%', #{param.keywords}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 分页获取列表数据 -->
+    <select id="listByPage" resultMap="BaseResultMap"
+            parameterType="${packageName}.model.${moduleName}.dto.${className}ListDTO">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ${tableName} AS t
+        <where>
+            t.del_flag = 0
+            <if test="param.keywords != null and param.keywords != ''">
+                and t.id like concat('%', #{param.keywords}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 详情数据 -->
+    <select id="get${className}" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ${tableName} AS t
+        <where>
+            t.del_flag = 0
+            <if test="id != null">
+                and t.id = #{id}
+            </if>
+        </where>
+    </select>
+
+</mapper>

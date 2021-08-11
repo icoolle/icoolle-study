@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 指明当前xml对应的Mapper -->
+<mapper namespace="com.icoolle.provider.pms.mapper.ProductMapper">
+
+    <!-- 实体类表字段映射关系 -->
+    <resultMap id="BaseResultMap" type="com.icoolle.model.pms.vo.ProductListVO">
+                                    <id property="id" column="id"/>
+                                                                        <result property="name" column="name"/>
+                                                            <result property="createUserId" column="create_user_id"/>
+                                                            <result property="createTime" column="create_time"/>
+                                                            <result property="modifyUserId" column="modify_user_id"/>
+                                                            <result property="modifyTime" column="modify_time"/>
+                                                            <result property="delFlag" column="del_flag"/>
+                                                            <result property="remark" column="remark"/>
+                        </resultMap>
+
+    <!-- 表字段 -->
+    <sql id="Base_Column_List">
+                    t.id,
+                                            t.name,
+                                            t.create_user_id,
+                                            t.create_time,
+                                            t.modify_user_id,
+                                            t.modify_time,
+                                            t.del_flag,
+                                                        t.remark
+                        </sql>
+
+    <!-- 不分页获取列表数据 -->
+    <select id="list" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM pms_product AS t
+        <where>
+            t.del_flag = 0
+            <if test="param.keywords != null and param.keywords != ''">
+                and t.id like concat('%', #{param.keywords}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 分页获取列表数据 -->
+    <select id="listByPage" resultMap="BaseResultMap"
+            parameterType="com.icoolle.model.pms.dto.ProductListDTO">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM pms_product AS t
+        <where>
+            t.del_flag = 0
+            <if test="param.keywords != null and param.keywords != ''">
+                and t.id like concat('%', #{param.keywords}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 详情数据 -->
+    <select id="getProduct" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM pms_product AS t
+        <where>
+            t.del_flag = 0
+            <if test="id != null">
+                and t.id = #{id}
+            </if>
+        </where>
+    </select>
+
+</mapper>

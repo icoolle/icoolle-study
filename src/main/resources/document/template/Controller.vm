@@ -1,0 +1,79 @@
+package ${packageName}.consumer.${moduleName};
+
+import ${packageName}.annotation.RestMappingController;
+import ${packageName}.common.constant.consts.AuthorConst;
+import ${packageName}.common.constant.consts.MethodConst;
+import ${packageName}.common.core.controller.IcoolleController;
+import ${packageName}.common.core.model.Result;
+import ${packageName}.common.core.model.ResultPage;
+import ${packageName}.model.${moduleName}.dto.${className}ListDTO;
+import ${packageName}.model.${moduleName}.dto.${className}SaveDTO;
+import ${packageName}.model.${moduleName}.dto.${className}UpdateDTO;
+import ${packageName}.model.${moduleName}.vo.${className}ListVO;
+import ${packageName}.provider.${moduleName}.service.${className}Service;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import java.util.List;
+
+/**
+* @author: ${author}
+* @description: ${comment}管理接口
+* @projectName: ${className}Controller
+* @package: ${packageName}.consumer.${moduleName}
+* @date: ${nowDate}
+* @version: V1.0.0
+*/
+@Api(tags = "${comment}管理")
+@RestMappingController("${pathName}")
+public class ${className}Controller extends IcoolleController<${className}Service> {
+
+
+    @ApiOperation(value = "分页查询${comment}数据", httpMethod = MethodConst.POST, notes = AuthorConst.${author})
+    @PostMapping("list_${pathName}")
+    public ResultPage<${className}ListVO> list${className}(@RequestBody ${className}ListDTO ${pathName}ListDTO) {
+        return ResultPage.startPage(super.service.listByPage(${pathName}ListDTO));
+    }
+
+    @ApiOperation(value = "不分页查询${comment}数据", httpMethod = MethodConst.POST, notes = AuthorConst.${author})
+    @PostMapping("list")
+    public Result<List<${className}ListVO>> list(@RequestBody ${className}ListDTO ${pathName}ListDTO) {
+         return Result.success(super.service.list(${pathName}ListDTO));
+    }
+
+    @ApiOperation(value = "添加${comment}数据", httpMethod = MethodConst.POST, notes = AuthorConst.${author})
+    @PostMapping("save_${pathName}")
+    public Result<?> save${className}(@Validated @RequestBody ${className}SaveDTO ${pathName}SaveDTO) {
+        super.service.save${className}(${pathName}SaveDTO);
+        return Result.success();
+    }
+
+    @ApiOperation(value = "修改${comment}数据", httpMethod = MethodConst.POST, notes = AuthorConst.${author})
+    @PostMapping("update_${pathName}")
+    public Result<?> update${className}(@Validated @RequestBody ${className}UpdateDTO ${pathName}UpdateDTO) {
+        super.service.update${className}(${pathName}UpdateDTO);
+        return Result.success();
+    }
+
+    @ApiOperation(value = "删除${comment}数据", httpMethod = MethodConst.GET, notes = AuthorConst.${author})
+    @GetMapping("delete_${pathName}/{id}")
+    @ApiParam(name = "id", value = "主键id", required = true)
+    public Result<?> delete${className}(@PathVariable Long id) {
+        super.service.delete${className}(id);
+        return Result.success();
+    }
+
+    @ApiOperation(value = "${comment}详情", httpMethod = MethodConst.GET,notes = AuthorConst.${author})
+    @GetMapping("get${className}/{id}")
+    @ApiParam(name = "id", value = "主键id", required = true)
+    public Result<${className}ListVO> get${className}(@PathVariable Long id) {
+         ${className}ListVO ${pathName}ListVO = super.service.get${className}(id);
+         return Result.success(${pathName}ListVO);
+    }
+
+}

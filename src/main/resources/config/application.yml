@@ -1,0 +1,110 @@
+################################################ server 配置信息  ##################################################################################
+server:
+  port: 8888
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 1024
+    direct-buffers: true
+
+
+
+################################################ spring 配置信息  ##################################################################################
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: icoolle-study
+  profiles:
+    active: @profiles.active@
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://@project.sql.url@:@project.sql.port@/@project.sql.datasource@?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useSSL=false&serverTimezone=GMT%2b8
+    username: @project.sql.username@
+    password: @project.sql.password@
+  thymeleaf:
+    suffix: .html
+    prefix: classpath:templates/
+    mode: HTML
+    encoding: utf-8
+    cache: false
+
+  mvc:
+    throw-exception-if-no-handler-found: true
+  messages:
+    encoding: UTF-8
+  servlet:
+    multipart:
+      max-file-size:  10MB
+      max-request-size:  30MB
+      enabled: true
+  redis:
+    host: @project.redis.host@
+    password: @project.redis.password@
+    database: 5
+    port: 6379
+    lettuce:
+      shutdown-timeout: 100 # 关闭超时时间
+      pool:
+        max-active: 8 # 连接池最大连接数（使用负值表示没有限制）
+        max-idle: 8 # 连接池中的最大空闲连接
+        max-wait: 30 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        min-idle: 0 # 连接池中的最小空闲连接
+
+################################################## mybatis-plus orm映射配置 ################################################################################
+mybatis-plus:
+  mapper-locations:
+    - classpath:mapper/**/*.xml
+    - classpath*:com/**/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+    db-config:
+      table-underline: true
+      logic-not-delete-value: 0
+      logic-delete-value: 1
+      logic-delete-field: delFalg
+  type-aliases-package: com.icoolle.model.*.po
+  type-enums-package: com.icoolle.common.constant.enums
+
+################################################## pagehelper分页配置 ################################################################################
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+###################################################### 系统监控信息配置 ############################################################################
+management:
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    info:
+      enabled: true
+##################################################### 日志信息配置 #############################################################################
+logging:
+  config: classpath:config/logback-spring.xml
+
+##################################################### knife4j信息配置 #############################################################################
+## 开启Swagger的Basic认证功能,默认是false
+knife4j:
+  basic:
+    enable: true
+    ## Basic认证用户名
+    username: icoolle-study
+    ## Basic认证密码
+    password: 123456
+
+##################################################### 项目自定义信息配置 #############################################################################
+icoolle-server:
+  aliyun:
+    oss:
+      endpoint:
+      bucketName:
+      accessKeyId:
+      accessKeySecret:
+      prefix:
+
+
